@@ -4,18 +4,20 @@ import EventSummary from "../../components/EventDetail/EventSummary";
 import EventLogistics from "../../components/EventDetail/EventLogistics";
 import EventContent from "../../components/EventDetail/EventContent";
 import ErrorAlert from "../../components/ui/ErrorAlert";
+import Comments from "../../components/Input/Comments";
 import Head from "next/head";
 
-const EventDetailPage = (props) => {
+function EventDetailPage(props) {
   const event = props.selectedEvent;
 
   if (!event) {
     return (
-      <ErrorAlert>
-        <p>No event found!</p>
-      </ErrorAlert>
+      <div className="center">
+        <p>Loading...</p>
+      </div>
     );
   }
+
   return (
     <Fragment>
       <Head>
@@ -32,9 +34,10 @@ const EventDetailPage = (props) => {
       <EventContent>
         <p>{event.description}</p>
       </EventContent>
+      <Comments eventId={event.id} />
     </Fragment>
   );
-};
+}
 
 export async function getStaticProps(context) {
   const eventId = context.params.eventId;
@@ -53,6 +56,7 @@ export async function getStaticPaths() {
   const events = await getFeaturedEvents();
 
   const paths = events.map((event) => ({ params: { eventId: event.id } }));
+
   return {
     paths: paths,
     fallback: "blocking",
