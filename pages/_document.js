@@ -14,3 +14,5 @@ class MyDocuments extends Document {
     );
   }
 }
+
+export default MyDocuments;
