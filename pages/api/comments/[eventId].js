@@ -28,11 +28,11 @@ const handler = (req, res) => {
   }
 
   if (req.method === "GET") {
-    const dummtList = [
+    const dummyList = [
       { id: "c1", name: "Max", text: "A first comment!" },
       { id: "c2", name: "Manu", text: "A second comment!" },
     ];
-    rest.status(200).json({ comments: dummtList });
+    res.status(200).json({ comments: dummyList });
   }
 };
 
